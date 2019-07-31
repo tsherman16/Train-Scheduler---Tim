@@ -6,13 +6,13 @@ var firebaseConfig = {
     storageBucket: "",
     messagingSenderId: "57730229378",
     appId: "1:57730229378:web:761d64a85f2bf893"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+  };
+  
+  firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
 
-$("#add-employee-btn").on("click", function (event) {
+$("#add-train-btn").on("click", function (event) {
     event.preventDefault();
 
     var trainName = $("#input-name").val().trim();
@@ -20,13 +20,13 @@ $("#add-employee-btn").on("click", function (event) {
     var trainFrequency = $("#input-frequency").val().trim();
     var trainTime = $("#input-trainTime").val().trim();
 
-    var newRow = {
+    var newTrain = {
         name: trainName,
         destination: trainDestination,
         frequency: trainFrequency,
         time: trainTime
     };
-    database.ref().push(newRow);
+    database.ref().push(newTrain);
 
     alert("Train successfully added");
 
@@ -36,7 +36,18 @@ $("#add-employee-btn").on("click", function (event) {
     $("#input-trainTime").val("");
 });
 
-database.ref().on("child_added", function(Snapshot) {
+database.ref().on("child_added", function (snapshot) {
+    var trainName = snapshot.val().name;
+    var trainDestination = snapshot.val().destination;
+    var trainFrequency = snapshot.val().frequency;
+    var trainTime = snapshot.val().trainTime;
 
+    var newRow = $("<tr>").append(
+        $("<td>").text(trainName),
+        $("<td>").text(trainDestination),
+        $("<td>").text(trainFrequency),
+        $("<td>").text(trainTime)
+    );
 
+    $("#train-table > tbody").append(newRow);
 });

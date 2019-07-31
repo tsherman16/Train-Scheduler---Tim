@@ -1,0 +1,41 @@
+#main-title {
+    background-color: #311D00;
+    color: white;
+    text-align: center;
+    padding: 50px;
+    font-family: 'Cinzel', "Times New Roman", serif;
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+#title-currentTrainTable {
+    background-color: #FF3C00;
+    color: white;
+    padding: 5px;
+}
+
+#table-currentTrainTable {
+    margin-bottom: 30px;
+}
+
+#title-submitForm {
+    background-color: #FF3C00;
+    color: white;
+    padding: 5px;
+}
+
+#body-submitForm {
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+.btn-primary {
+    background-color: #FF3C00;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #311D00;
+    color: white;
+}
