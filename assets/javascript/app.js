@@ -40,13 +40,24 @@ database.ref().on("child_added", function (snapshot) {
     var trainName = snapshot.val().name;
     var trainDestination = snapshot.val().destination;
     var trainFrequency = snapshot.val().frequency;
-    var trainTime = snapshot.val().trainTime;
+    var trainTime = snapshot.val().time;
+
+    var firstTimeConverted = moment(trainTime, "HH:mm").subtract(1, "years");
+
+    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+
+    var tRemainder = diffTime % parseInt(trainFrequency);
+
+    var tMinutesTillTrain = parseInt(trainFrequency) - tRemainder;
+
+    var nextTrain = moment().add(tMinutesTillTrain, "minutes");
 
     var newRow = $("<tr>").append(
         $("<td>").text(trainName),
         $("<td>").text(trainDestination),
         $("<td>").text(trainFrequency),
-        $("<td>").text(trainTime)
+        $("<td>").text(moment(nextTrain).format("hh:mm")),
+        $("<td>").text(tMinutesTillTrain)
     );
 
     $("#train-table > tbody").append(newRow);
